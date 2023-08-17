@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5>Title : {{ todo.title }}</h5>
+<form method="post" action="{% url 'edit-todo' todo.id %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="title" placeholder="Enter a title for this activity">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Details</label>
+        <input type="text" name="body" placeholder="Enter activity details">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date</label>
+        <input type="date" name="date">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Time</label>
+        <input type="time" name="time">
+    </div>
+
+    <button type="submit" class="btn btn-success">Edit</button>
+
+</form>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if todo %}
+    <table class="table table-success table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Details</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Completed</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        {% for item in todo %}
+            <tbody>
+            <tr>
+                
+                <td scope="col">{{ item.title}}</td>
+                <td scope="col">{{ item.body }}</td>
+                <td scope="col">{{ item.date }}</td>
+                <td scope="col">{{ item.time }}</td>
+                <td>
+                {% if not item.complete %}
+                    <a href="{% url 'complete-todo' item.id %}">Pending</a>
+                {% else %}
+                    <a href="{% url 'complete-todo' item.id %}">Done</a>
+                {% endif %}
+                </td>
+                <td>
+                <small><a href="{% url 'edit-todo' item.id %}">Edit</a></small>
+                <small><a href="{% url 'delete-todo' item.id %}">Delete</a></small>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <table class="table table-dark table-striped-columns">
+        <thead>
+        <h5> You can start adding activities <a href="{% url 'add-todo' %}">here</a></h5>
+        </thead>
+    </table>
+{% endif %}
+{% endblock %}

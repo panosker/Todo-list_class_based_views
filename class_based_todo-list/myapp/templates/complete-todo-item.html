@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h5>Have you completed this activity?</h5>
+    <p>title: {{ todo.title  }}</p>
+    
+    <form method="POST" action="{% url 'complete-todo' todo_id=todo.pk %}">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Complete</button>
+    </form>
+    
+{% endblock %}
